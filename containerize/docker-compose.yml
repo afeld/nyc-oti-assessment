@@ -5,12 +5,18 @@ services:
     build: app
     volumes:
       - ./app/src:/usr/src/app
+    # "Allow local edits of the app source to be reflected in the running app container without restart (eg: hot code reload)" by using the development server
+    environment:
+      FLASK_APP: server
+      FLASK_ENV: development
+    command: flask run --host 0.0.0.0 --port 8000
   nginx:
     container_name: containerize_nginx_1
     build: nginx
     ports:
       - "80:80"
       - "443:443"
+    # "The `app` service should not reachable directly from the host and can only be accessed through the `nginx` service."
     links:
       - app
     volumes:
