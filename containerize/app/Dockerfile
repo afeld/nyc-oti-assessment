@@ -1,4 +1,5 @@
-FROM python:3.10
+# "Docker best practices including … image size"
+FROM python:3.10-alpine
 
 WORKDIR /usr/src/app
 
