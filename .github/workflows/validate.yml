@@ -1,0 +1,13 @@
+name: Validate Containerize
+
+on:
+  push:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run the validation
+        run: ./validate.sh
+        working-directory: containerize
