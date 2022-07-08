@@ -6,5 +6,10 @@ WORKDIR /usr/src/app
 COPY src/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# "Docker best practices including security": don't run as root
+# https://wiki.alpinelinux.org/wiki/Setting_up_a_new_user#Creating_a_new_user
+RUN adduser -D containerizer
+USER containerizer
+
 # "use gunicorn for the production server service"
-CMD gunicorn -w 4 -b 0.0.0.0 'server:app'
+CMD gunicorn --bind 0.0.0.0 'server:app'
