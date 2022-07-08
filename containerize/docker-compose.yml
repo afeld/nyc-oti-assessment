@@ -13,6 +13,7 @@ services:
   nginx:
     container_name: containerize_nginx_1
     build: nginx
+    # "Nginx should accept requests on ports 80 and 443"
     ports:
       - "80:80"
       - "443:443"
